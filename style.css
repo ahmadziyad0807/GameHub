@@ -1,0 +1,1124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.game-menu {
+    flex: 1;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-item:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 25px;
+}
+
+.menu-item.active {
+    background: rgba(102, 126, 234, 0.3);
+    border-left: 4px solid #667eea;
+}
+
+.menu-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.menu-item .icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+}
+
+.menu-item .label {
+    flex: 1;
+    font-size: 1em;
+}
+
+.coming-soon {
+    font-size: 0.7em;
+    background: #e74c3c;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.sidebar-footer {
+    padding: 15px;
+    text-align: center;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9em;
+    opacity: 0.7;
+}
+
+.sidebar-footer a:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+
+.main-content {
+    margin-left: 250px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.difficulty-selector {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.difficulty-selector label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.size-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.size-btn:hover {
+    background: #f0f0f0;
+}
+
+.size-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.game-controls button {
+    padding: 10px 20px;
+    border: none;
+    background: #764ba2;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.game-controls button:hover {
+    background: #5a3a7f;
+    transform: translateY(-2px);
+}
+
+#gameBoard {
+    display: inline-block;
+    margin: 20px auto;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sudoku-grid {
+    display: grid;
+    gap: 0;
+    background: #333;
+}
+
+.sudoku-cell {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #999;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sudoku-cell:focus {
+    outline: 3px solid #667eea;
+    background: #f0f7ff;
+}
+
+.sudoku-cell.prefilled {
+    background: #e8e8e8;
+    color: #333;
+    cursor: default;
+}
+
+.sudoku-cell.error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.sudoku-cell.correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.sudoku-cell.hint {
+    background: #fff9c4;
+    animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+#message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 30px;
+}
+
+.success {
+    color: #2e7d32;
+}
+
+.error-msg {
+    color: #c62828;
+}
+
+.info {
+    color: #1976d2;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    .main-content {
+        margin-left: 200px;
+    }
+    
+    .menu-item .label {
+        font-size: 0.9em;
+    }
+    
+    .coming-soon {
+        display: none;
+    }
+    
+    .sudoku-cell {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 60px;
+    }
+    
+    .main-content {
+        margin-left: 60px;
+    }
+    
+    .sidebar-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .menu-item .label,
+    .coming-soon,
+    .sidebar-footer p {
+        display: none;
+    }
+    
+    .menu-item {
+        justify-content: center;
+        padding: 15px 10px;
+    }
+    
+    .menu-item .icon {
+        margin-right: 0;
+    }
+    
+    .sudoku-cell {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.3em;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Memory Match Game Styles */
+.memory-grid {
+    display: grid;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 700px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    cursor: pointer;
+    perspective: 1000px;
+    width: 100%;
+    max-width: 120px;
+    min-width: 80px;
+}
+
+.memory-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped .memory-card-inner {
+    transform: rotateY(180deg);
+}
+
+.memory-card-front,
+.memory-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 4em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.memory-card-front {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.memory-card-back {
+    background: white;
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched .memory-card-inner {
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+    animation: matchPulse 0.5s;
+}
+
+@keyframes matchPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.memory-card.matched .memory-card-back {
+    background: #e8f5e9;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.difficulty-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.difficulty-btn:hover {
+    background: #f0f0f0;
+}
+
+.difficulty-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .memory-card {
+        min-width: 70px;
+        min-height: 70px;
+    }
+    
+    .memory-card-front,
+    .memory-card-back {
+        font-size: 2.5em;
+    }
+    
+    .memory-card-front {
+        font-size: 2em;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Jigsaw Puzzle Game Styles */
+.puzzle-grid {
+    display: grid;
+    gap: 5px;
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.puzzle-tile {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+.puzzle-tile:hover:not(.empty) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.puzzle-tile.empty {
+    background: transparent !important;
+    box-shadow: none;
+    cursor: default;
+}
+
+.puzzle-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.puzzle-btn:hover {
+    background: #f0f0f0;
+}
+
+.puzzle-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.puzzle-preview {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    animation: fadeIn 0.3s;
+}
+
+.puzzle-preview h3 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.preview-grid {
+    max-width: 300px;
+    margin-bottom: 15px;
+}
+
+.preview-grid .puzzle-tile {
+    font-size: 1.5em;
+    cursor: default;
+}
+
+.preview-grid .puzzle-tile:hover {
+    transform: none;
+}
+
+.preview-close-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 30px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.preview-close-btn:hover {
+    background: #5568d3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .puzzle-tile {
+        font-size: 1.5em;
+    }
+    
+    .puzzle-grid {
+        max-width: 350px;
+    }
+    
+    .preview-grid {
+        max-width: 250px;
+    }
+    
+    .preview-grid .puzzle-tile {
+        font-size: 1.2em;
+    }
+}
+
+/* Maze Runner Game Styles */
+.maze-grid {
+    display: grid;
+    gap: 1px;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 10px;
+    background: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.maze-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    transition: all 0.2s;
+}
+
+.maze-cell.wall {
+    background: #2c3e50;
+}
+
+.maze-cell.path {
+    background: #ecf0f1;
+    cursor: pointer;
+}
+
+.maze-cell.path:hover {
+    background: #d5dbdb;
+}
+
+.maze-cell.player {
+    background: #3498db !important;
+    animation: playerPulse 1s infinite;
+}
+
+.maze-cell.goal {
+    background: #2ecc71 !important;
+    animation: goalPulse 1.5s infinite;
+}
+
+.maze-cell.solution-path {
+    background: #f39c12 !important;
+}
+
+.maze-cell.player.solution-path {
+    background: #3498db !important;
+}
+
+.maze-cell.goal.solution-path {
+    background: #2ecc71 !important;
+}
+
+@keyframes playerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes goalPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes solutionGlow {
+    0% { background: #ecf0f1 !important; }
+    50% { background: #f39c12 !important; }
+    100% { background: #f39c12 !important; }
+}
+
+.maze-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.maze-btn:hover {
+    background: #f0f0f0;
+}
+
+.maze-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.maze-instructions {
+    text-align: center;
+    padding: 10px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    margin: 10px 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .maze-grid {
+        max-width: 350px;
+    }
+    
+    .maze-cell {
+        font-size: 0.8em;
+    }
+}
+
+/* Coloring Book Game Styles */
+.coloring-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.coloring-canvas {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+}
+
+#coloringSvg {
+    display: block;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+.color-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.color-btn.active {
+    border-color: #667eea;
+    transform: scale(1.15);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.image-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.image-selector button {
+    padding: 8px 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.image-selector button:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+}
+
+#imageName {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #667eea;
+    min-width: 120px;
+    text-align: center;
+}
+
+.coloring-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.coloring-controls button {
+    padding: 10px 20px;
+    background: #764ba2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.coloring-controls button:hover {
+    background: #5a3a7f;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    #coloringSvg {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .color-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .color-palette {
+        max-width: 350px;
+    }
+}
+
+/* Math Quiz Game Styles */
+.math-operations {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.operation-btn {
+    padding: 12px 20px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+
+.operation-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.operation-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.math-difficulty-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.math-difficulty-btn:hover {
+    background: #f0f0f0;
+}
+
+.math-difficulty-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.question-display {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px;
+    border-radius: 15px;
+    margin: 30px auto;
+    max-width: 500px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#mathQuestion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+    flex-wrap: wrap;
+}
+
+.number {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px 25px;
+    border-radius: 10px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.operator {
+    font-size: 1.2em;
+}
+
+.equals {
+    font-size: 1.2em;
+}
+
+.question-mark {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px 25px;
+    border-radius: 10px;
+    animation: pulse 1.5s infinite;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.answer-btn {
+    padding: 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    background: white;
+    color: #667eea;
+    border: 3px solid #667eea;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.answer-btn:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    transform: scale(1.05);
+}
+
+.answer-btn:disabled {
+    cursor: not-allowed;
+}
+
+.answer-btn.correct {
+    background: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+    animation: correctPulse 0.5s;
+}
+
+.answer-btn.wrong {
+    background: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+    animation: shake 0.5s;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.math-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.math-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.math-stat-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.math-stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+@media (max-width: 600px) {
+    #mathQuestion {
+        font-size: 2em;
+        gap: 10px;
+    }
+    
+    .number, .question-mark {
+        padding: 10px 15px;
+        min-width: 60px;
+    }
+    
+    .answer-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .answer-btn {
+        font-size: 1.5em;
+    }
+    
+    .operation-btn {
+        min-width: 100px;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+/* Ensure buttons are clickable */
+#resetMath, #nextQuestion {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+#nextQuestion {
+    background: #2ecc71;
+    animation: pulse 1s infinite;
+}
+
+#nextQuestion:hover {
+    background: #27ae60;
+}
+
+/* Footer Styles */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    background: rgba(44, 62, 80, 0.95);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    color: #4ECDC4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #45B7D1;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        left: 200px;
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        left: 60px;
+        font-size: 11px;
+        padding: 8px;
+    }
+}

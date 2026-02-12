@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Game Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>🎯 Game Hub</h2>
+        </div>
+        <nav class="game-menu">
+            <a href="#" class="menu-item active" data-game="sudoku">
+                <span class="icon">🔢</span>
+                <span class="label">Sudoku</span>
+            </a>
+            <a href="#" class="menu-item" data-game="memory">
+                <span class="icon">🃏</span>
+                <span class="label">Memory Match</span>
+            </a>
+            <a href="#" class="menu-item" data-game="puzzle">
+                <span class="icon">🧩</span>
+                <span class="label">Jigsaw Puzzle</span>
+            </a>
+            <a href="#" class="menu-item" data-game="maze">
+                <span class="icon">🌀</span>
+                <span class="label">Maze Runner</span>
+            </a>
+            <a href="#" class="menu-item" data-game="coloring">
+                <span class="icon">🎨</span>
+                <span class="label">Coloring Book</span>
+            </a>
+            <a href="#" class="menu-item disabled" data-game="math">
+                <span class="icon">➕</span>
+                <span class="label">Math Quiz</span>
+                <span class="coming-soon">Coming Soon</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>v1.0.0</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Created by <a href="https://www.linkedin.com/in/ahmadziyad/" target="_blank" rel="noopener noreferrer" style="color: #4ECDC4; text-decoration: none;">Ahmad Ziyad</a></p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Sudoku Game -->
+        <div class="container game-container" id="sudokuGame">
+            <h1>🎮 Sudoku for Kids</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Size:</label>
+                    <button class="size-btn active" data-size="4">4x4 (Easy)</button>
+                    <button class="size-btn" data-size="6">6x6 (Medium)</button>
+                    <button class="size-btn" data-size="9">9x9 (Hard)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newGame">New Game</button>
+                    <button id="resetGame">Reset</button>
+                    <button id="checkSolution">Check Solution</button>
+                    <button id="hint">Get Hint</button>
+                </div>
+            </div>
+
+            <div id="gameBoard"></div>
+            
+            <div id="message"></div>
+        </div>
+
+        <!-- Memory Match Game -->
+        <div class="container game-container" id="memoryGame" style="display: none;">
+            <h1>🃏 Memory Match</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="difficulty-btn active" data-difficulty="easy">Easy (4 pairs)</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Medium (5 pairs)</button>
+                    <button class="difficulty-btn" data-difficulty="hard">Hard (6 pairs)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newMemoryGame">New Game</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Moves:</span>
+                        <span class="stat-value" id="movesCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Pairs Found:</span>
+                        <span class="stat-value" id="pairsCount">0 / 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="memoryGameBoard"></div>
+            
+            <div id="memoryMessage"></div>
+        </div>
+
+        <!-- Jigsaw Puzzle Game -->
+        <div class="container game-container" id="puzzleGame" style="display: none;">
+            <h1>🧩 Jigsaw Puzzle</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="puzzle-btn active" data-difficulty="easy">Easy (3x3)</button>
+                    <button class="puzzle-btn" data-difficulty="medium">Medium (4x4)</button>
+                    <button class="puzzle-btn" data-difficulty="hard">Hard (5x5)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newPuzzleGame">New Puzzle</button>
+                    <button id="showPreview">Show Preview</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Moves:</span>
+                        <span class="stat-value" id="puzzleMoves">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="puzzleGameBoard"></div>
+            
+            <div id="puzzleMessage"></div>
+        </div>
+
+        <!-- Maze Runner Game -->
+        <div class="container game-container" id="mazeGame" style="display: none;">
+            <h1>🌀 Maze Runner</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="maze-btn active" data-difficulty="easy">Easy (10x10)</button>
+                    <button class="maze-btn" data-difficulty="medium">Medium (15x15)</button>
+                    <button class="maze-btn" data-difficulty="hard">Hard (20x20)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newMazeGame">New Maze</button>
+                    <button id="showSolution">Show Solution</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Steps:</span>
+                        <span class="stat-value" id="mazeSteps">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time:</span>
+                        <span class="stat-value" id="mazeTime">0s</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="maze-instructions">
+                Use Arrow Keys or Click adjacent cells to move 🎯
+            </div>
+
+            <div id="mazeGameBoard"></div>
+            
+            <div id="mazeMessage"></div>
+        </div>
+
+        <!-- Coloring Book Game -->
+        <div class="container game-container" id="coloringGame" style="display: none;">
+            <h1>🎨 Coloring Book</h1>
+        
+            <div class="coloring-container">
+                <div class="image-selector">
+                    <button id="prevImage">◀ Previous</button>
+                    <span id="imageName">Butterfly</span>
+                    <button id="nextImage">Next ▶</button>
+                </div>
+
+                <div class="coloring-canvas">
+                    <svg id="coloringSvg" width="400" height="400" viewBox="0 0 100 100"></svg>
+                </div>
+
+                <div id="colorPalette" class="color-palette"></div>
+
+                <div class="coloring-controls">
+                    <button id="clearColors">Clear All</button>
+                    <button id="downloadImage">Download</button>
+                </div>
+            </div>
+            
+            <div id="coloringMessage"></div>
+        </div>
+
+        <!-- Math Quiz Game -->
+        <div class="container game-container" id="mathGame" style="display: none;">
+            <h1>➕ Math Quiz</h1>
+        
+            <div class="controls">
+                <div class="math-operations">
+                    <button class="operation-btn active" data-operation="addition">➕ Addition</button>
+                    <button class="operation-btn" data-operation="subtraction">➖ Subtraction</button>
+                    <button class="operation-btn" data-operation="multiplication">✖️ Multiplication</button>
+                    <button class="operation-btn" data-operation="division">➗ Division</button>
+                </div>
+
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="math-difficulty-btn active" data-difficulty="easy">Easy</button>
+                    <button class="math-difficulty-btn" data-difficulty="medium">Medium</button>
+                    <button class="math-difficulty-btn" data-difficulty="hard">Hard</button>
+                </div>
+            </div>
+
+            <div class="question-display">
+                <div id="mathQuestion"></div>
+            </div>
+
+            <div class="answer-options">
+                <button class="answer-btn" data-answer="0">0</button>
+                <button class="answer-btn" data-answer="0">0</button>
+                <button class="answer-btn" data-answer="0">0</button>
+                <button class="answer-btn" data-answer="0">0</button>
+            </div>
+
+            <div class="math-stats">
+                <div class="math-stat-item">
+                    <span class="math-stat-label">Score</span>
+                    <span class="math-stat-value"><span id="mathScore">0</span> / <span id="mathTotal">0</span></span>
+                </div>
+                <div class="math-stat-item">
+                    <span class="math-stat-label">Accuracy</span>
+                    <span class="math-stat-value" id="mathPercentage">0%</span>
+                </div>
+                <div class="math-stat-item">
+                    <span class="math-stat-label">Streak</span>
+                    <span class="math-stat-value" id="mathStreak">0</span>
+                </div>
+            </div>
+
+            <div class="game-controls" style="margin-top: 20px;">
+                <button id="resetMath">Reset Score</button>
+                <button id="nextQuestion" style="display: none;">Next Question ➡️</button>
+            </div>
+            
+            <div id="mathMessage"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="memory-match.js"></script>
+    <script src="jigsaw-puzzle.js"></script>
+    <script src="maze-runner.js"></script>
+    <script src="coloring-book.js"></script>
+    <script src="math-quiz.js"></script>
+</body>
+</html>
