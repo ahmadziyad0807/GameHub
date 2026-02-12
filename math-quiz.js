@@ -88,7 +88,7 @@ class MathQuizGame {
         };
 
         const range = ranges[this.difficulty];
-        let num1, num2, answer, symbol;
+        let num1, num2, num3, num4, answer, symbol;
 
         switch(this.operation) {
             case 'addition':
@@ -120,11 +120,23 @@ class MathQuizGame {
                 num1 = num2 * answer;
                 symbol = '÷';
                 break;
+            
+            case 'four-numbers':
+                const fourRange = this.difficulty === 'easy' ? 10 : this.difficulty === 'medium' ? 15 : 20;
+                num1 = this.randomInt(1, fourRange);
+                num2 = this.randomInt(1, fourRange);
+                num3 = this.randomInt(1, fourRange);
+                num4 = this.randomInt(1, fourRange);
+                answer = num1 + num2 + num3 + num4;
+                symbol = '+';
+                break;
         }
 
         this.currentQuestion = {
             num1: num1,
             num2: num2,
+            num3: num3,
+            num4: num4,
             answer: answer,
             symbol: symbol
         };
@@ -134,13 +146,29 @@ class MathQuizGame {
 
     displayQuestion() {
         const questionDiv = document.getElementById('mathQuestion');
-        questionDiv.innerHTML = `
-            <span class="number">${this.currentQuestion.num1}</span>
-            <span class="operator">${this.currentQuestion.symbol}</span>
-            <span class="number">${this.currentQuestion.num2}</span>
-            <span class="equals">=</span>
-            <span class="question-mark">?</span>
-        `;
+        
+        // Check if it's the four numbers operation
+        if (this.operation === 'four-numbers') {
+            questionDiv.innerHTML = `
+                <span class="number">${this.currentQuestion.num1}</span>
+                <span class="operator">${this.currentQuestion.symbol}</span>
+                <span class="number">${this.currentQuestion.num2}</span>
+                <span class="operator">${this.currentQuestion.symbol}</span>
+                <span class="number">${this.currentQuestion.num3}</span>
+                <span class="operator">${this.currentQuestion.symbol}</span>
+                <span class="number">${this.currentQuestion.num4}</span>
+                <span class="equals">=</span>
+                <span class="question-mark">?</span>
+            `;
+        } else {
+            questionDiv.innerHTML = `
+                <span class="number">${this.currentQuestion.num1}</span>
+                <span class="operator">${this.currentQuestion.symbol}</span>
+                <span class="number">${this.currentQuestion.num2}</span>
+                <span class="equals">=</span>
+                <span class="question-mark">?</span>
+            `;
+        }
 
         // Generate answer options
         const correctAnswer = this.currentQuestion.answer;
