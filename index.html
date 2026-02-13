@@ -36,6 +36,14 @@
                 <span class="icon">➕</span>
                 <span class="label">Math Quiz</span>
             </a>
+            <a href="#" class="menu-item" data-game="wordsearch">
+                <span class="icon">🔤</span>
+                <span class="label">Word Search</span>
+            </a>
+            <a href="#" class="menu-item" data-game="shapesorting">
+                <span class="icon">🔷</span>
+                <span class="label">Shape Sorting</span>
+            </a>
         </nav>
         <div class="sidebar-footer">
             <p>v1.0.0</p>
@@ -250,6 +258,80 @@
             
             <div id="mathMessage"></div>
         </div>
+
+        <!-- Word Search Game -->
+        <div class="container game-container" id="wordSearchGame" style="display: none;">
+            <h1>🔤 Word Search</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="word-search-btn active" data-difficulty="easy">Easy (10x10)</button>
+                    <button class="word-search-btn" data-difficulty="medium">Medium (12x12)</button>
+                    <button class="word-search-btn" data-difficulty="hard">Hard (15x15)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newWordSearchGame">New Game</button>
+                    <button id="getWordHint">Get Hint 💡</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Words Found:</span>
+                        <span class="stat-value" id="wordsFoundCount">0 / 0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Hints Left:</span>
+                        <span class="stat-value" id="hintsCount">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="word-search-container">
+                <div id="wordSearchGameBoard"></div>
+                <div id="wordSearchList"></div>
+            </div>
+            
+            <div id="wordSearchMessage"></div>
+        </div>
+
+        <!-- Shape Sorting Game -->
+        <div class="container game-container" id="shapeSortingGame" style="display: none;">
+            <h1>🔷 Shape Sorting</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="shape-sorting-btn active" data-difficulty="easy">Easy (6 shapes)</button>
+                    <button class="shape-sorting-btn" data-difficulty="medium">Medium (10 shapes)</button>
+                    <button class="shape-sorting-btn" data-difficulty="hard">Hard (14 shapes)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newShapeSortingGame">New Game</button>
+                    <button id="shuffleShapes">Shuffle 🔄</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Sorted:</span>
+                        <span class="stat-value" id="shapesSortedCount">0 / 0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Progress:</span>
+                        <span class="stat-value" id="sortingProgress">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shape-sorting-container">
+                <div id="shapesContainer" class="shapes-section"></div>
+                <div id="placeholdersContainer" class="placeholders-section"></div>
+            </div>
+            
+            <div id="shapeSortingMessage"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
@@ -258,5 +340,7 @@
     <script src="maze-runner.js"></script>
     <script src="coloring-book.js"></script>
     <script src="math-quiz.js"></script>
+    <script src="word-search.js"></script>
+    <script src="shape-sorting.js"></script>
 </body>
 </html>

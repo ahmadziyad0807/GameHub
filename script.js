@@ -55,6 +55,10 @@ class SudokuGame {
                 document.getElementById('coloringGame').style.display = 'block';
             } else if (gameName === 'math') {
                 document.getElementById('mathGame').style.display = 'block';
+            } else if (gameName === 'wordsearch') {
+                document.getElementById('wordSearchGame').style.display = 'block';
+            } else if (gameName === 'shapesorting') {
+                document.getElementById('shapeSortingGame').style.display = 'block';
             }
         };
         
@@ -294,4 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new MazeRunnerGame();
     new ColoringBookGame();
     new MathQuizGame();
+    new WordSearchGame();
+    new ShapeSortingGame();
 });

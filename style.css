@@ -1147,3 +1147,306 @@ h1 {
         padding: 8px;
     }
 }
+
+
+/* Word Search Game Styles */
+.word-search-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.word-search-grid {
+    display: grid;
+    gap: 2px;
+    background: #333;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+.word-search-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.word-search-cell:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.word-search-cell.selected {
+    background: #FFA07A;
+    color: white;
+}
+
+.word-search-cell.found {
+    background: #2ecc71;
+    color: white;
+}
+
+.word-search-cell.hint {
+    background: #f39c12;
+    color: white;
+    animation: hintPulse 0.5s 3;
+}
+
+@keyframes hintPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+#wordSearchList {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 200px;
+}
+
+#wordSearchList h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.word-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.word-item {
+    padding: 10px 15px;
+    background: white;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.word-item.found {
+    background: #2ecc71;
+    color: white;
+    text-decoration: line-through;
+    border-color: #27ae60;
+}
+
+.word-search-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.word-search-btn:hover {
+    background: #f0f0f0;
+}
+
+.word-search-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .word-search-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .word-search-cell {
+        font-size: 1em;
+        min-width: 25px;
+        min-height: 25px;
+    }
+    
+    #wordSearchList {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 600px) {
+    .word-search-cell {
+        font-size: 0.9em;
+        min-width: 20px;
+        min-height: 20px;
+    }
+}
+
+
+/* Shape Sorting Game Styles */
+.shape-sorting-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.shapes-section,
+.placeholders-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    min-width: 280px;
+}
+
+.shapes-section h3,
+.placeholders-section h3 {
+    color: #667eea;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.shapes-grid,
+.placeholders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    justify-items: center;
+}
+
+.draggable-shape {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    cursor: grab;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.draggable-shape:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.draggable-shape:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.shape-placeholder {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    border: 3px dashed #ddd;
+    transition: all 0.3s;
+    padding: 10px;
+}
+
+.shape-placeholder.drag-over {
+    background: #f0f7ff;
+    border-color: #667eea;
+    transform: scale(1.05);
+}
+
+.shape-placeholder.filled {
+    border: 3px solid #2ecc71;
+    background: #e8f5e9;
+    animation: fillPulse 0.5s;
+}
+
+@keyframes fillPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.shape-placeholder.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shape-sorting-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.shape-sorting-btn:hover {
+    background: #f0f0f0;
+}
+
+.shape-sorting-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .shape-sorting-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .shapes-section,
+    .placeholders-section {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .shapes-grid,
+    .placeholders-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .draggable-shape,
+    .shape-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .draggable-shape,
+    .shape-placeholder {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .shapes-grid,
+    .placeholders-grid {
+        gap: 10px;
+    }
+}
