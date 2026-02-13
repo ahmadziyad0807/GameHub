@@ -150,21 +150,21 @@ class MathQuizGame {
         // Check if it's the four numbers operation
         if (this.operation === 'four-numbers') {
             questionDiv.innerHTML = `
-                <span class="number">${this.currentQuestion.num1}</span>
+                <span class="number number-color-1">${this.currentQuestion.num1}</span>
                 <span class="operator">${this.currentQuestion.symbol}</span>
-                <span class="number">${this.currentQuestion.num2}</span>
+                <span class="number number-color-2">${this.currentQuestion.num2}</span>
                 <span class="operator">${this.currentQuestion.symbol}</span>
-                <span class="number">${this.currentQuestion.num3}</span>
+                <span class="number number-color-3">${this.currentQuestion.num3}</span>
                 <span class="operator">${this.currentQuestion.symbol}</span>
-                <span class="number">${this.currentQuestion.num4}</span>
+                <span class="number number-color-4">${this.currentQuestion.num4}</span>
                 <span class="equals">=</span>
                 <span class="question-mark">?</span>
             `;
         } else {
             questionDiv.innerHTML = `
-                <span class="number">${this.currentQuestion.num1}</span>
+                <span class="number number-color-1">${this.currentQuestion.num1}</span>
                 <span class="operator">${this.currentQuestion.symbol}</span>
-                <span class="number">${this.currentQuestion.num2}</span>
+                <span class="number number-color-2">${this.currentQuestion.num2}</span>
                 <span class="equals">=</span>
                 <span class="question-mark">?</span>
             `;

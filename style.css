@@ -936,6 +936,22 @@ h1 {
     text-align: center;
 }
 
+.number-color-1 {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+}
+
+.number-color-2 {
+    background: linear-gradient(135deg, #4ECDC4 0%, #6FE5DC 100%);
+}
+
+.number-color-3 {
+    background: linear-gradient(135deg, #FFA07A 0%, #FFB89A 100%);
+}
+
+.number-color-4 {
+    background: linear-gradient(135deg, #F7DC6F 0%, #F9E79F 100%);
+}
+
 .operator {
     font-size: 1.2em;
 }
@@ -948,7 +964,15 @@ h1 {
     background: rgba(255, 255, 255, 0.3);
     padding: 15px 25px;
     border-radius: 10px;
-    animation: pulse 1.5s infinite;
+    animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+    0% { background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%); }
+    25% { background: linear-gradient(135deg, #4ECDC4 0%, #6FE5DC 100%); }
+    50% { background: linear-gradient(135deg, #FFA07A 0%, #FFB89A 100%); }
+    75% { background: linear-gradient(135deg, #F7DC6F 0%, #F9E79F 100%); }
+    100% { background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%); }
 }
 
 .answer-options {
