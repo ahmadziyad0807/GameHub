@@ -59,6 +59,12 @@ class SudokuGame {
                 document.getElementById('wordSearchGame').style.display = 'block';
             } else if (gameName === 'shapesorting') {
                 document.getElementById('shapeSortingGame').style.display = 'block';
+            } else if (gameName === 'minesweeper') {
+                document.getElementById('minesweeperGame').style.display = 'block';
+            } else if (gameName === 'helicopter') {
+                document.getElementById('helicopterGame').style.display = 'block';
+            } else if (gameName === 'dinosaur') {
+                document.getElementById('dinosaurGame').style.display = 'block';
             }
         };
         
@@ -300,4 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new MathQuizGame();
     new WordSearchGame();
     new ShapeSortingGame();
+    new MinesweeperGame();
+    new HelicopterGame();
+    new DinosaurGame();
 });

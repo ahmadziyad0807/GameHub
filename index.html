@@ -44,6 +44,18 @@
                 <span class="icon">🔷</span>
                 <span class="label">Shape Sorting</span>
             </a>
+            <a href="#" class="menu-item" data-game="minesweeper">
+                <span class="icon">💣</span>
+                <span class="label">Minesweeper</span>
+            </a>
+            <a href="#" class="menu-item" data-game="helicopter">
+                <span class="icon">🚁</span>
+                <span class="label">Helicopter</span>
+            </a>
+            <a href="#" class="menu-item" data-game="dinosaur">
+                <span class="icon">🦖</span>
+                <span class="label">Dino Runner</span>
+            </a>
         </nav>
         <div class="sidebar-footer">
             <p>v1.0.0</p>
@@ -332,6 +344,118 @@
             
             <div id="shapeSortingMessage"></div>
         </div>
+
+        <!-- Minesweeper Game -->
+        <div class="container game-container" id="minesweeperGame" style="display: none;">
+            <h1>💣 Minesweeper</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="minesweeper-btn active" data-difficulty="easy">Easy (8x8, 10 mines)</button>
+                    <button class="minesweeper-btn" data-difficulty="medium">Medium (10x10, 20 mines)</button>
+                    <button class="minesweeper-btn" data-difficulty="hard">Hard (12x12, 30 mines)</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="newMinesweeperGame">New Game</button>
+                    <button id="revealSafeCells">Reveal Safe Cell 💡</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Mines Left:</span>
+                        <span class="stat-value" id="minesRemaining">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Revealed:</span>
+                        <span class="stat-value" id="cellsRevealed">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time:</span>
+                        <span class="stat-value" id="minesweeperTime">0s</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="minesweeper-instructions">
+                Left-click to reveal | Right-click to flag 🚩
+            </div>
+
+            <div id="minesweeperGameBoard"></div>
+            
+            <div id="minesweeperMessage"></div>
+        </div>
+
+        <!-- Helicopter Game -->
+        <div class="container game-container" id="helicopterGame" style="display: none;">
+            <h1>🚁 Helicopter Game</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="helicopter-btn active" data-difficulty="easy">Easy</button>
+                    <button class="helicopter-btn" data-difficulty="medium">Medium</button>
+                    <button class="helicopter-btn" data-difficulty="hard">Hard</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="startHelicopterGame">Start Game</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Score:</span>
+                        <span class="stat-value" id="helicopterScore">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">High Score:</span>
+                        <span class="stat-value" id="helicopterHighScore">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helicopter-canvas-container">
+                <canvas id="helicopterCanvas"></canvas>
+            </div>
+            
+            <div id="helicopterMessage"></div>
+        </div>
+
+        <!-- Dinosaur Game -->
+        <div class="container game-container" id="dinosaurGame" style="display: none;">
+            <h1>🦖 Dino Runner</h1>
+        
+            <div class="controls">
+                <div class="difficulty-selector">
+                    <label>Choose Difficulty:</label>
+                    <button class="dinosaur-btn active" data-difficulty="easy">Easy</button>
+                    <button class="dinosaur-btn" data-difficulty="medium">Medium</button>
+                    <button class="dinosaur-btn" data-difficulty="hard">Hard</button>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="startDinosaurGame">Start Game</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Score:</span>
+                        <span class="stat-value" id="dinosaurScore">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">High Score:</span>
+                        <span class="stat-value" id="dinosaurHighScore">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dinosaur-canvas-container">
+                <canvas id="dinosaurCanvas"></canvas>
+            </div>
+            
+            <div id="dinosaurMessage"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
@@ -342,5 +466,8 @@
     <script src="math-quiz.js"></script>
     <script src="word-search.js"></script>
     <script src="shape-sorting.js"></script>
+    <script src="minesweeper.js"></script>
+    <script src="helicopter.js"></script>
+    <script src="dinosaur.js"></script>
 </body>
 </html>
